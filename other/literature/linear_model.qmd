@@ -1,0 +1,35 @@
+---
+title: "Linear model"
+author: "Max LI"
+date: "2024/9/20"
+format: pdf
+---
+
+## Model Summary
+
+### Formula
+
+The model predicts the number of crimes (`num_crimes`) based on the number of mental health apprehensions (`num_mha_reports`) using a linear relationship.
+
+### Equation
+
+$$
+C = 6748.244 + 2.451 \times MHA
+$$
+
+### Coefficients and Interpretation
+
+-   **C**\
+    C stands for the predicted number of crimes, which is also the dependent variable in this model.
+
+-   **Intercept:** 6748.244\
+    This suggests that, even when there are no MHA reports, the baseline number of crimes in a division is approximately 6748.
+
+-   **MHA:** 2.451\
+    For each additional MHA report, the model predicts an increase of approximately 2.45 crimes in the corresponding division.
+
+### Interpretation
+
+The model suggests a positive linear relationship between MHA reports and crimes, meaning that as MHA reports increase, the number of crimes tends to increase as well.
+
+

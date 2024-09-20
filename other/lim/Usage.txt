@@ -1,0 +1,21 @@
+LLM: ChatGPT-4.
+Date: 20 September 2024
+
+User
+Error in file(file, "rt") : cannot open the connection
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file 'STA304 Paper 1 MaxLI/data/raw_data/raw_data_mha.csv': No such file or directory
+
+GPT
+The error message you're seeing indicates that RStudio cannot find the file at the specified location. To fix this, make sure the file path in your read.csv() function matches the actual location of your CSV files
+
+User
+Error in file(file, if (append) "a" else "w") : 
+  cannot open the connection
+In addition: Warning message:
+In file(file, if (append) "a" else "w") :
+  cannot open file '/home/rstudio/STA304_Paper_1_MaxLI/data/model/model_summary.txt': No such file or directory
+  
+GPT
+The error message indicates that the directory for saving the model summary file (/home/rstudio/STA304_Paper_1_MaxLI/data/model/) does not exist. To fix this, you can create the directory in your script before attempting to save the file.
