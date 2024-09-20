@@ -1,0 +1,5 @@
+This linear regression model examines the relationship between the number of crimes (num_crimes) and the number of MHA reports (num_mha_reports) based on the cleaned dataset. The model's intercept is 6748.24, indicating the expected number of crimes when there are no MHA reports. For each additional MHA report, the number of crimes is expected to increase by 2.45, as indicated by the positive coefficient for num_mha_reports.
+
+The model has an R-squared value of 0.66, meaning that approximately 66% of the variance in the number of crimes can be explained by the number of MHA reports. The F-statistic (31.07, p-value = 4.194e-05) suggests that the overall model is statistically significant. The t-value (5.574) and the small p-value (4.19e-05) for num_mha_reports also indicate that this variable is highly significant in predicting the number of crimes.
+
+The residual standard error is 4835, and there are 16 degrees of freedom, which reflects the spread of the residuals around the regression line.
