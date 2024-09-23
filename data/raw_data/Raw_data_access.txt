@@ -1,5 +1,5 @@
 The original raw data is too large to upload to github.
-However, if you run "01-download_data.R", it will download two raw data named as "raw_data_mci.csv" and "raw_data_mha.csv".
+However, if you run "01-download_data.R", it will download two raw data stored here named as "raw_data_mci.csv" and "raw_data_mha.csv".
 The link to both raw data are :
 raw_data_mci.csv: https://open.toronto.ca/dataset/major-crime-indicators/
 raw_data_mha.csv: https://open.toronto.ca/dataset/mental-health-apprehensions/
