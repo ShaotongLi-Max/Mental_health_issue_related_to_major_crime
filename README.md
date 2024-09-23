@@ -10,6 +10,7 @@ The repository is organized as follows:
 
 -   **data/raw_data**\
     Contains the original raw data files, including `raw_data_mha.csv` and `raw_data_mci.csv`. These datasets are used for cleaning and analysis.
+    The raw data is too big to upload to Github, therefore please run 01-download_data.R to download them to this path.
 
 -   **data/analysis_data**\
     Holds the cleaned and processed datasets generated from the raw data after running the cleaning scripts.
