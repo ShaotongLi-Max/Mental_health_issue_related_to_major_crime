@@ -67,12 +67,14 @@ However, there are limitations to this data: A unique event number should not be
 
 Therefore, the columns chosen for this analysis were simply: "DIVISION" representing the Police Division where Offence Occurred. In cleaning data process, a new column "num_mha_reports" was made in the analysis data, representing the number of MHA reports in each police division.
 
+The bar plot (Figure @fig-MHA) and the line plot (Figure @fig-MHA-2) show the number of MHA Apprehensions in each police division and its trend.
+
 \newpage
 
-## 3.1 Results of MHA Apprehensions Data
+## 3.1 Overview of MHA Apprehensions Data
 
 ```{r,fig.pos='H'}
-#| label: MHA Apprehensions Data
+#| label: fig-MHA
 #| fig-cap: Number of MHA reports in each Police division (2014-2024)
 #| echo: false
 #| warning: false
@@ -106,7 +108,7 @@ ggplot(clean_data, aes(y = DIVISION, x = num_mha_reports)) +
 ```
 
 ```{r,fig.pos='H'}
-#| label: MHA Apprehensions Data 2
+#| label: fig-MHA-2
 #| fig-cap: Number of MHA reports in each Police division (2014-2024)
 #| echo: false
 #| warning: false
@@ -140,12 +142,14 @@ This data includes all MCI occurrences reported to the Toronto Police Service, i
 
 The columns chosen for this analysis were simply: "DIVISION" representing the Police Division where major crime Occurred. In cleaning data process, a new column "num_crimes" was made in the analysis data, representing the number of major crimes took place in each police division.
 
+The bar plot (Figure @fig-MCI) and the line plot (Figure @fig-MCI-2) show the number of Major Crime Indicators in each police division and its trend.
+
 \newpage
 
-## 4.1 Results of Major Crime Indicator Data
+## 4.1 Overview of Major Crime Indicator Data
 
 ```{r,fig.pos='H'}
-#| label: Major Crime Indicator Data
+#| label: fig-MCI
 #| fig-cap: Number of Major Crime Indicator in each Police division (2014-2024)
 #| echo: false
 #| warning: false
@@ -175,7 +179,7 @@ ggplot(clean_data, aes(y = DIVISION, x = num_crimes)) +
 ```
 
 ```{r,fig.pos='H'}
-#| label: Major Crime Indicator Data 2
+#| label: fig-MCI-2
 #| fig-cap: Number of Major Crime Indicator in each Police division (2014-2024)
 #| echo: false
 #| warning: false
@@ -206,8 +210,9 @@ ggplot(clean_data, aes(x = DIVISION, y = num_crimes, group = 1)) +
 
 # 5.MHA reports relationship to Major Crime Indicator
 
+## 5.1 Comparing two datasets
 ```{r,fig.pos='H'}
-#| label: comparison 
+#| label: fig-compare
 #| fig-cap: comparison between two data
 #| echo: false
 #| warning: false
@@ -232,7 +237,7 @@ ggplot(clean_data, aes(y = DIVISION)) +
 ```
 
 ```{r,fig.pos='H'}
-#| label: comparison 2
+#| label: fig-compare-2
 #| fig-cap: comparison between two data
 #| echo: false
 #| warning: false
@@ -259,11 +264,16 @@ ggplot(clean_data, aes(x = DIVISION)) +
 
 ```
 
-By comparing the two line plots,a positive relationship between the number of MHA reports and the number of Major Crime Indicator, the number of MHA reports seems to influence the number of crime incidents accross different police divisions. In order to confirm there are linear relationship between two factors, a linear model is made to fit in this situation based on two data:
+By comparing the two bar plots (Figure @fig-compare) and line plots (Figure @fig-compare-2),there seems to be a positive relationship between the number of MHA reports and the number of Major Crime Indicator. To check whether they are linearly related, a test for linear relationship is necessary.
+
+## 5.2 Introducing linear model
+In order to confirm there are linear relationship between two factors, a linear model is made to fit in this situation based on two data sets:
 
 $$
-C = 6748.244 + 2.451 \times MHA
-$$ in which:
+C = 6748.244 + 2.451 \times MHA 
+$$
+
+in which:
 
 -   **C**\
     C stands for the predicted number of crimes, which is also the dependent variable in this model.
@@ -274,10 +284,10 @@ $$ in which:
 -   **MHA:** 2.451\
     For each additional MHA report, the model predicts an increase of approximately 2.45 crimes in the corresponding division.
 
-The corresponding graph of linear model is:
+The corresponding graph of linear model is @fig-linear-model
 
 ```{r,fig.pos='H'}
-#| label: Linear model
+#| label: fig-linear-model
 #| fig-cap: Linear Model
 #| echo: false
 #| warning: false
@@ -294,10 +304,11 @@ ggplot(clean_data, aes(x = num_mha_reports, y = num_crimes)) +
   theme_minimal()
 ```
 
-The p-values for both intercept and coefficient (MHA Reports) are below the significant level of 0.05, indicating a strong evidence that the relationship between MHA Reports and major crime indicator follows this linear model.
+The p-values for both intercept and coefficient (MHA Reports) are below the significant level of 0.05 (Figure @fig-Summary), indicating a strong evidence that the relationship between MHA Reports and major crime indicator follows this linear model.
 
 ```{r,fig.pos='H'}
-#| label: Linear model summary
+#| label: fig-Summary
+#| fig-cap: Linear Model Summary 1
 #| echo: false
 #| warning: false
 #| message: false
@@ -338,9 +349,9 @@ summary_table
 
 # 6.Discussion
 
-This paper investigated the relationship between the number of Mental Health Act Apprehensions and the major crime indicator, according to Toronto Police Services data retrieved from OpenData Toronto. Results shows that as the number of MHA reports rises, the major crime indicator also increases, based on data from 2014 to 2024. Furthermore, there appears to be a positive linear relationship between the number of MHA reports and the number of major crime indicator, which can be expressed as a linear model: C = 6748.244 + 2.451 \* MHA.
+This paper investigated the relationship between the number of Mental Health Act Apprehensions and the major crime indicator, according to Toronto Police Services data retrieved from OpenData Toronto. Results shows that as the number of MHA reports rises, the major crime indicator also increases, based on data from 2014 to 2024. Furthermore, there appears to be a positive linear relationship between the number of MHA reports and the number of major crime indicator, which can be expressed as a linear model $C = 6748.244 + 2.451 \times MHA$.
 
-The result of this paper shares the insight of the research by Public Safety Canada: "In the international research for both youth and adults analyzed for this report, findings suggest that certain mental health disorders, such as substance use disorder, conduct disorder, and antisocial personality disorder were shown to have a significant correlation to offending and re-offending." The p-value of our model is 4.19\*10\^-5, which is far below the significance level of 0.05, indicating a strong correlation between the number of Mental Health Act Apprehensions and the major crime indicator.[@PublicSafetyCanada]
+The result of this paper shares the insight of the research by Public Safety Canada: "In the international research for both youth and adults analyzed for this report, findings suggest that certain mental health disorders, such as substance use disorder, conduct disorder, and antisocial personality disorder were shown to have a significant correlation to offending and re-offending." The p-value of our model is $4.19 \times 10^{-5}$, which is far below the significance level of 0.05, indicating a strong correlation between the number of Mental Health Act Apprehensions and the major crime indicator.[@PublicSafetyCanada]
 
 However, other variables like population could affect the number of both MHA reports and major crime indicator. Population is not included in Major crime indicator data and MHA Apprehensions Data. Adding population as an independent variable to the model could be a way of studying the relationship between MHA reports and major crime indicator.
 
@@ -354,10 +365,10 @@ The limitation of this paper is split into two parts: the limitation of data (7.
 
 ## 7.1 Data outlier
 
-Significant outliers are evident in both the Mental Health Act (MHA) reports and the Major Crime Indicator data. These outliers may be attributable to the relatively small sample size, given that there are only 20 police divisions in Toronto. The limited number of divisions can lead to greater variability in the data, making it more susceptible to the influence of atypical observations.
+Significant outliers are evident in both the Mental Health Act (MHA) reports and the Major Crime Indicator data (Figure @fig-Box-Plot). These outliers may be attributable to the relatively small sample size, given that there are only 20 police divisions in Toronto. The limited number of divisions can lead to greater variability in the data, making it more susceptible to the influence of atypical observations.
 
 ```{r,fig.pos='H'}
-#| label: Box Plot
+#| label: fig-Box-Plot
 #| fig-cap: The box plot of two factors
 #| echo: false
 #| warning: false
@@ -390,10 +401,11 @@ ggplot(long_data, aes(x = Indicator, y = Count)) +
 
 ## 7.2 Model accuracy
 
-The linear model reveals a significant linear relationship between the number of Mental Health Act (MHA) reports and the major crime indicator. However, the adjusted R-squared value of 0.6388 indicates that approximately 36.12% of the variance in crime rates remains unexplained by the model. This finding implies that, in addition to MHA reports, there are likely other influencing factors contributing to variations in crime rates.
+The linear model reveals a significant linear relationship between the number of Mental Health Act (MHA) reports and the major crime indicator. However, the adjusted R-squared value of 0.6388 indicates that approximately 36.12% of the variance in crime rates remains unexplained by the model (Figure @fig-Summary-2). This finding implies that, in addition to MHA reports, there are likely other influencing factors contributing to variations in crime rates.
 
 ```{r,fig.pos='H'}
-#| label: Summary table
+#| label: fig-Summary-2
+#| fig-cap: Linear Model Summary 2
 #| echo: false
 #| warning: false
 #| message: false
@@ -428,10 +440,10 @@ summary_table
 
 ## 7.3 Model residual
 
-The residuals in this model are relatively large, leading to a complex residual pattern. This complexity may indicate potential issues with model fit or the presence of unaccounted variability in the data.
+The residuals in this model are relatively large, leading to a complex residual pattern (Figure @fig-Residual-Plot). This complexity may indicate potential issues with model fit or the presence of unaccounted variability in the data.
 
 ```{r,fig.pos='H'}
-#| label: Residual Plot
+#| label: fig-Residual-Plot
 #| fig-cap: The Residual Vs Fitted value plot
 #| echo: false
 #| warning: false
@@ -482,7 +494,6 @@ ggplot(data = NULL, aes(x = fitted_values, y = residuals)) +
     \end{tabular}
 \end{table}
 ```
-
 ```{=tex}
 \begin{table}[H]
     \centering
@@ -511,8 +522,8 @@ ggplot(data = NULL, aes(x = fitted_values, y = residuals)) +
     \end{tabular}
 \end{table}
 ```
-
+```{=tex}
 \vspace{2em}
 \newpage
-
+```
 # 9.Reference
