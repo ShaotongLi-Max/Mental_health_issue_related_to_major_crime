@@ -1,10 +1,10 @@
 ---
-title: "Mental health issue linked to major crime"
+title: "Mental health issue linked to major crimes"
 author: Max LI
-thanks: "Code and data are available at: https://github.com/ShaotongLi-Max/STA304-Paper-1-MaxLI."
+thanks: "Code and data are available at: https://github.com/ShaotongLi-Max/Mental_health_issue_related_to_major_crime."
 date: 2024/9/21
 date-format: long
-abstract: "This paper discusses the relationship between mental health issues and crime, focusing on Mental Health Act Apprehensions and major crime indicators in several Toronto police divisions. A positive linear relationship is found between the number of MHA apprehensions and reported crimes, suggesting that mental health-related interventions could help reduce crime rates while supporting affected individuals."
+abstract: "This paper discusses the relationship between mental health issues and crime, focusing on Mental Health Act Apprehensions and major crime indicators in several Toronto police divisions. A positive linear relationship is found between the number of MHA apprehensions and reported crimes, suggesting that mental health-related interventions could help reduce crime rates while also supporting affected individuals."
 format: 
   pdf:
     toc: true           
@@ -29,9 +29,9 @@ library(broom)
 
 # 1.Introduction
 
-Mental Health Act is the law that describes what should happen when someone, in mental illness, should be treated to protect themselves and others around. The new Mental Health Act issued in 2014 set new regulations towards teenagers: "MHA Apprehensions of individuals aged 17 and under have been omitted to protect youth identity. From 2014 to 2020, these individuals comprised 6.5% (4,724 of 71,717) of all MHA Apprehensions, with individuals under 12 comprising 0.4% (320 of 71,717), and 12-17 comprising 6.1% (4,404 of 71,717) respectively. There are instances where an individual’s age group is classified as “Not Recorded”; these account for 1.3% (915 of 71,717) of all MHA Apprehensions."[@mha_toronto] Now all data of MHA Apprehensions is stored in the data set provided by Toronto police department.
+Mental Health Act is a law that describes what should happen when someone with a mental illness should be treated to protect themselves and others around. The new Mental Health Act issued in 2014 set new regulations towards teenagers: "MHA Apprehensions of individuals aged 17 and under have been omitted to protect youth identity. From 2014 to 2020, these individuals comprised 6.5% (4,724 of 71,717) of all MHA Apprehensions, with individuals under 12 comprising 0.4% (320 of 71,717), and 12-17 comprising 6.1% (4,404 of 71,717) respectively. There are instances where an individual’s age group is classified as “Not Recorded”; these account for 1.3% (915 of 71,717) of all MHA Apprehensions."[@mha_toronto] Now all data of MHA Apprehensions is stored in the data set provided by Toronto police department.
 
-According to the research provided by Public Safety Canada, of the 5 million people who came into contact with police, approximately one in five (18.8%) met the criteria for a mental or substance use disorder. One in three Canadians with a mental health disorder reported having contact with police for at least one reason studied (34.4%).[@PublicSafetyCanada] This is suggesting that there could be a positive relationship between Mental illness and crime rate.
+According to the research provided by Public Safety Canada, of the 5 million people who came into contact with police, approximately one in five (18.8%) met the criteria for a mental or substance use disorder. One in three Canadians with a mental health disorder reported having contact with police for at least one reason studied (34.4%).[@PublicSafetyCanada] This is suggesting that there could be a positive relationship between mental illness and crime rates.
 
 This paper investigates the relationship between mental health apprehensions under the Mental Health Act (MHA) and major crime incidents across various police divisions in Toronto. Using two datasets, this paper analyzes the distribution of both mental health-related incidents and crimes across divisions through visualizations and statistical methods.It further develops a linear regression model to quantify and explore the positive correlation between MHA reports and crime rates, suggesting that a better understanding of this relationship could aid in crime control and mental health care strategies.
 
@@ -39,7 +39,7 @@ In section 3 and 4, this paper shows descriptions and visualizations of MHA appr
 
 In section 5, this paper compares MHA apprehensions with crime data and develops the positive linear regression model between the two factors. In section 6, the paper further discuss the model and how it can be used in reality.
 
-In section 7, this paper explains the limitation of the original data and the model.
+In section 7, this paper explains the limitation of the original data and the model. In section 8, this paper lists the cleaned data as well as the full model summary table.
 
 \newpage
 
@@ -88,7 +88,7 @@ clean_data <- clean_data %>%
 clean_data$DIVISION <- factor(clean_data$DIVISION, levels = clean_data$DIVISION)
 
 ggplot(clean_data, aes(y = DIVISION, x = num_mha_reports)) +
-  geom_bar(stat = "identity", fill = "#4E79A7", color = "black", width = 0.7, position = position_dodge(width = 0.9)) +  
+  geom_bar(stat = "identity", fill = "#A9CCE3", color = "#A9CCE3", width = 0.7, position = position_dodge(width = 0.9)) +  
   labs(title = "Number of MHA Reports by Division",
        y = "Police Division",
        x = "MHA Reports") +
@@ -113,8 +113,8 @@ ggplot(clean_data, aes(y = DIVISION, x = num_mha_reports)) +
 #| message: false
 
 ggplot(clean_data, aes(x = DIVISION, y = num_mha_reports, group = 1)) +
-  geom_line(color = "#4E79A7", size = 1) +
-  geom_point(size = 3, color = "#4E79A7") + 
+  geom_line(color = "#A9CCE3", size = 1) +
+  geom_point(size = 3, color = "#A9CCE3") + 
   labs(title = "Number of MHA Reports by Division",
        x = "Police Division", 
        y = "MHA Reports") +    
@@ -156,7 +156,7 @@ abbreviate_number <- function(x) {
 }
 
 ggplot(clean_data, aes(y = DIVISION, x = num_crimes)) +
-  geom_bar(stat = "identity", fill = "#E15759", color = "black", width = 0.7) +  
+  geom_bar(stat = "identity", fill = "#F1948A", color = "#F1948A", width = 0.7) +  
   labs(title = "Number of Crimes by Division",
        y = "Division",
        x = "Crime Incidents") +
@@ -182,8 +182,8 @@ ggplot(clean_data, aes(y = DIVISION, x = num_crimes)) +
 #| message: false
 
 ggplot(clean_data, aes(x = DIVISION, y = num_crimes, group = 1)) +
-  geom_line(color = "#E15759", size = 1) +
-  geom_point(size = 3, color = "#E15759") + 
+  geom_line(color = "#F1948A", size = 1) +
+  geom_point(size = 3, color = "#F1948A") + 
   labs(title = "Number of Crimes by Division",
        x = "Division",  
        y = "Crime Incidents") +  
@@ -215,8 +215,8 @@ ggplot(clean_data, aes(x = DIVISION, y = num_crimes, group = 1)) +
 
 scale_factor <- max(clean_data$num_mha_reports) / max(clean_data$num_crimes)
 ggplot(clean_data, aes(y = DIVISION)) +
-  geom_bar(aes(x = num_mha_reports), stat = "identity", fill = "#4E79A7", color = "black", width = 0.5) +
-  geom_bar(aes(x = num_crimes * scale_factor), stat = "identity", fill = "#E15759", color = "black", width = 0.5, position = position_nudge(y = -0.5)) +
+  geom_bar(aes(x = num_mha_reports), stat = "identity", fill = "#A9CCE3", color = "#A9CCE3", width = 0.5) +
+  geom_bar(aes(x = num_crimes * scale_factor), stat = "identity", fill = "#F1948A", color = "#F1948A", width = 0.5, position = position_nudge(y = -0.5)) +
   labs(title = "Comparison of MHA Reports and Crimes by Division",
        y = "Division",
        x = "MHA Reports / Crime Incidents") +
@@ -241,10 +241,10 @@ ggplot(clean_data, aes(y = DIVISION)) +
 scale_factor <- max(clean_data$num_mha_reports) / max(clean_data$num_crimes)
 
 ggplot(clean_data, aes(x = DIVISION)) +
-  geom_line(aes(y = num_mha_reports, group = 1), color = "#4E79A7", size = 1) +  
-  geom_point(aes(y = num_mha_reports), size = 3, color = "#4E79A7") +
-  geom_line(aes(y = num_crimes * scale_factor, group = 1), color = "#E15759", size = 1) +  
-  geom_point(aes(y = num_crimes * scale_factor), size = 3, color = "#E15759") +
+  geom_line(aes(y = num_mha_reports, group = 1), color = "#A9CCE3", size = 1) +  
+  geom_point(aes(y = num_mha_reports), size = 3, color = "#A9CCE3") +
+  geom_line(aes(y = num_crimes * scale_factor, group = 1), color = "#F1948A", size = 1) +  
+  geom_point(aes(y = num_crimes * scale_factor), size = 3, color = "#F1948A") +
   labs(title = "Comparison of MHA Reports and Crimes by Division",
        x = "Division",
        y = "MHA Reports") +
@@ -259,7 +259,7 @@ ggplot(clean_data, aes(x = DIVISION)) +
 
 ```
 
-By comparing the two line plot,a positive relationship between the number of MHA reports and the number of Major Crime Indicator, the number of MHA reports seems to influence the number of crime incidents accross different police divisions. In order to make sure there are linear relationship between two factors, a linear model is made to fit in this situation based on two data:
+By comparing the two line plots,a positive relationship between the number of MHA reports and the number of Major Crime Indicator, the number of MHA reports seems to influence the number of crime incidents accross different police divisions. In order to confirm there are linear relationship between two factors, a linear model is made to fit in this situation based on two data:
 
 $$
 C = 6748.244 + 2.451 \times MHA
@@ -286,15 +286,15 @@ The corresponding graph of linear model is:
 model <- lm(num_crimes ~ num_mha_reports, data = clean_data)
 clean_data$predicted_crimes <- predict(model, newdata = clean_data)
 ggplot(clean_data, aes(x = num_mha_reports, y = num_crimes)) +
-  geom_point(color = "blue") +  
-  geom_line(aes(y = predicted_crimes), color = "red") + 
+  geom_point(color = "#A9CCE3") +  
+  geom_line(aes(y = predicted_crimes), color = "#F1948A") + 
   labs(title = "Number of Crimes vs. Number of MHA Reports",
        x = "Number of MHA Reports",
        y = "Number of Crimes") +
   theme_minimal()
 ```
 
-The p-value for both intercept and coefficient (MHA Reports) are below the significant level of 0.05, indicating a strong evidence that the relationship between MHA Reports and major crime indicator follows this linear model.
+The p-values for both intercept and coefficient (MHA Reports) are below the significant level of 0.05, indicating a strong evidence that the relationship between MHA Reports and major crime indicator follows this linear model.
 
 ```{r,fig.pos='H'}
 #| label: Linear model summary
@@ -315,7 +315,7 @@ model_stats_df <- data.frame(term = c("R-squared", "Adjusted R-squared"),
 final_summary_df <- coefficients_df  
 
 summary_table <- gt(data = final_summary_df) %>%
-  tab_header(title = "Linear Model Summary") %>%
+  tab_header(title = "Linear Model Summary 1") %>%
   text_transform(
     locations = cells_body(columns = vars(term)),
     fn = function(x) ifelse(x == "(Intercept)", "Intercept", x)
@@ -340,19 +340,21 @@ summary_table
 
 This paper investigated the relationship between the number of Mental Health Act Apprehensions and the major crime indicator, according to Toronto Police Services data retrieved from OpenData Toronto. Results shows that as the number of MHA reports rises, the major crime indicator also increases, based on data from 2014 to 2024. Furthermore, there appears to be a positive linear relationship between the number of MHA reports and the number of major crime indicator, which can be expressed as a linear model: C = 6748.244 + 2.451 \* MHA.
 
-The result of this paper shares the insight of the research by Public Safety Canada: "In the international research for both youth and adults analyzed for this report, findings suggest that certain mental health disorders, such as substance use disorder, conduct disorder, and antisocial personality disorder were shown to have a significant correlation to offending and re-offending." The p-value of our model is 4.19\*10\^-5, which is far blow the significance level of 0.05, indicating strong correlation between the number of Mental Health Act Apprehensions and the major crime indicator.[@PublicSafetyCanada]
+The result of this paper shares the insight of the research by Public Safety Canada: "In the international research for both youth and adults analyzed for this report, findings suggest that certain mental health disorders, such as substance use disorder, conduct disorder, and antisocial personality disorder were shown to have a significant correlation to offending and re-offending." The p-value of our model is 4.19\*10\^-5, which is far below the significance level of 0.05, indicating a strong correlation between the number of Mental Health Act Apprehensions and the major crime indicator.[@PublicSafetyCanada]
 
-However, other variables like population could affect the number of both MHA reports and major crime indicator. Population is not included in Major crime indicator data and MHA Apprehensions Data. Adding population as a independent variable to the model could be a way of studying the relationship between MHA reports and major crime indicator.
+However, other variables like population could affect the number of both MHA reports and major crime indicator. Population is not included in Major crime indicator data and MHA Apprehensions Data. Adding population as an independent variable to the model could be a way of studying the relationship between MHA reports and major crime indicator.
 
-This paper and its model can help the government and society better allocate resources for both mental health services and law enforcement. By understanding the correlation between mental health apprehensions and crime rates, policymakers can implement targeted interventions to address underlying issues, such as providing mental health support in high-crime areas or improving police training on handling mental health incidents. Additionally, this model can assist in predicting areas where both mental health-related incidents and crime are likely to occur, helping authorities to proactively implement prevention strategies, potentially reducing crime and improving mental health outcomes.
+This paper and its model can assist the government and society better allocate resources for both mental health services and law enforcement. By understanding the correlation between mental health apprehensions and crime rates, policymakers can implement targeted interventions to address underlying issues, such as providing mental health support in high-crime areas or improving police training on handling mental health incidents. Additionally, this model can assist in predicting areas where both mental health-related incidents and crime are likely to occur, helping authorities proactively implement prevention strategies, which could potentially reducing crime and improving mental health outcomes.
 
 \newpage
 
 # 7.Limitation
-The limitation of this paper is split into two parts: the limitation of data and the limitation of linear model
+
+The limitation of this paper is split into two parts: the limitation of data (7.1) and the limitation of linear model (7.2 & 7.3)
 
 ## 7.1 Data outlier
-Significant outliers presents in both MHA reports and Major Crime Indicator data, which is possibly caused by a relative small smaple population as there are only 20 police division in Toronto.
+
+Significant outliers are evident in both the Mental Health Act (MHA) reports and the Major Crime Indicator data. These outliers may be attributable to the relatively small sample size, given that there are only 20 police divisions in Toronto. The limited number of divisions can lead to greater variability in the data, making it more susceptible to the influence of atypical observations.
 
 ```{r,fig.pos='H'}
 #| label: Box Plot
@@ -371,8 +373,8 @@ long_data <- clean_data %>%
                values_to = "Count")
 
 ggplot(long_data, aes(x = Indicator, y = Count)) +
-  geom_boxplot(outlier.colour = "black", outlier.shape = 16, outlier.size = 2, fill = NA, color = "black") +
-  geom_jitter(width = 0.2, alpha = 0.5) +  
+  geom_boxplot(outlier.colour = "#F1948A", outlier.shape = 16, outlier.size = 2, fill = NA, color = "#A9CCE3") +
+  geom_jitter(width = 0.2, alpha = 0.5, color = "#F1948A") +  
   labs(title = "Boxplot of MHA Reports and Crimes",
        x = "Indicator",
        y = "Count") +
@@ -386,12 +388,12 @@ ggplot(long_data, aes(x = Indicator, y = Count)) +
 
 \newpage
 
-## 7.2 Linear model
-The linear model indeed shows significant linear relationship between the number of MHA reports and major crime indicator. However, the adjusted R-squared in this model is 0.6388, indicating that there are 36.12% of the variance left unexplained by the model. This could imply that other factors, aside from MHA reports, might be influencing crime rates.
+## 7.2 Model accuracy
+
+The linear model reveals a significant linear relationship between the number of Mental Health Act (MHA) reports and the major crime indicator. However, the adjusted R-squared value of 0.6388 indicates that approximately 36.12% of the variance in crime rates remains unexplained by the model. This finding implies that, in addition to MHA reports, there are likely other influencing factors contributing to variations in crime rates.
 
 ```{r,fig.pos='H'}
 #| label: Summary table
-#| fig-cap: Summary table of linear model
 #| echo: false
 #| warning: false
 #| message: false
@@ -409,7 +411,7 @@ summary_stats <- tibble(
 
 summary_table <- summary_stats %>%
   gt() %>%
-  tab_header(title = "Linear Model Summary") %>%
+  tab_header(title = "Linear Model Summary 2") %>%
   fmt_number(
     columns = vars(Value),
     decimals = 3
@@ -422,8 +424,11 @@ summary_table <- summary_stats %>%
 summary_table
 ```
 
+\newpage
+
 ## 7.3 Model residual
-The residuals in this model are quite large, leading to a complex residual pattern, which may indicate potential issues with model fit or the presence of unaccounted variability in the data.
+
+The residuals in this model are relatively large, leading to a complex residual pattern. This complexity may indicate potential issues with model fit or the presence of unaccounted variability in the data.
 
 ```{r,fig.pos='H'}
 #| label: Residual Plot
@@ -432,10 +437,82 @@ The residuals in this model are quite large, leading to a complex residual patte
 #| warning: false
 #| message: false
 
+fitted_values <- fitted(model)
+residuals <- resid(model)
 
-plot(model, which=1)
+ggplot(data = NULL, aes(x = fitted_values, y = residuals)) +
+  geom_point(color = "#A9CCE3") +     # Set point color to #A9CCE3
+  geom_smooth(method = "loess", color = "#F1948A", se = FALSE) +  # Smoothed line following residuals
+  labs(x = "Fitted Values", y = "Residuals") +  # Add axis labels
+  theme_minimal()
+
 ```
 
 \newpage
 
-# 8.Reference
+# 8.Appendix
+
+```{=tex}
+\begin{table}[H]
+    \centering
+    \caption{Linear Model Summary 3}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Statistic} & \textbf{Value} \\ \hline
+        Minimum & -10046.5 \\ \hline
+        1st Quartile (1Q) & -3273.8 \\ \hline
+        Median & -423.9 \\ \hline
+        3rd Quartile (3Q) & 4260.7 \\ \hline
+        Maximum & 6344.1 \\ \hline
+        \textbf{Coefficients} &  \\ \hline
+        (Intercept) & 6748.2438 \\ \hline
+        Std. Error (Intercept) & 2970.8029 \\ \hline
+        t value (Intercept) & 2.272 \\ \hline
+        Pr(>|t|) (Intercept) & 0.0373 * \\ \hline
+        num\_mha\_reports & 2.4509 \\ \hline
+        Std. Error (num\_mha\_reports) & 0.4397 \\ \hline
+        t value (num\_mha\_reports) & 5.574 \\ \hline
+        Pr(>|t|) (num\_mha\_reports) & 4.19e-05 *** \\ \hline
+        \textbf{Significance Codes} & 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1 \\ \hline
+        \textbf{Residual Standard Error} & 4835 on 16 degrees of freedom \\ \hline
+        \textbf{Multiple R-squared} & 0.6601 \\ \hline
+        \textbf{Adjusted R-squared} & 0.6388 \\ \hline
+        \textbf{F-statistic} & 31.07 on 1 and 16 DF \\ \hline
+        \textbf{p-value of F-statistic} & 4.194e-05 \\ \hline
+    \end{tabular}
+\end{table}
+```
+
+```{=tex}
+\begin{table}[H]
+    \centering
+    \caption{Cleaned Data}
+    \begin{tabular}{|l|r|r|}
+        \hline
+        \textbf{Division} & \textbf{Number of Crimes} & \textbf{Number of MHA Reports} \\ \hline
+        D11 & 15894 & 5435 \\ \hline
+        D12 & 17151 & 5137 \\ \hline
+        D13 & 14180 & 4226 \\ \hline
+        D14 & 27590 & 12603 \\ \hline
+        D22 & 26578 & 6302 \\ \hline
+        D23 & 25782 & 5769 \\ \hline
+        D31 & 29099 & 6531 \\ \hline
+        D32 & 31273 & 7528 \\ \hline
+        D33 & 17836 & 5516 \\ \hline
+        D41 & 27591 & 6752 \\ \hline
+        D42 & 24037 & 5357 \\ \hline
+        D43 & 27509 & 7069 \\ \hline
+        D51 & 32666 & 10233 \\ \hline
+        D52 & 23487 & 5916 \\ \hline
+        D53 & 21199 & 6584 \\ \hline
+        D54 & 6347 & 1965 \\ \hline
+        D55 & 24524 & 8636 \\ \hline
+        NSA & 3992 & 755 \\ \hline
+    \end{tabular}
+\end{table}
+```
+
+\vspace{2em}
+\newpage
+
+# 9.Reference
