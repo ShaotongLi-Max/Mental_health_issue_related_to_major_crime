@@ -45,8 +45,10 @@ In section 7, this paper explains the limitation of the original data and the mo
 
 # 2.Data
 
+## 2.1 Packages
 The data used in this paper came from the Open Data Toronto portal through the library opendatatoronto [@OpenDataToronto]. Data were cleaned and analyzed using the open source statistical programming language R [@R]. Libraries tidyverse [@tidyverse], dplyr [@dplyr], and lubridate [@lubridate] were used for simulating, cleaning and testing. Graphics were made using ggplot2 [@ggplot2], gt[@gt] and broom[@broom].
 
+## 2.2 Clean data process
 The cleaned data comes from two raw data sets: Mental Health Act Apprehensions Dataset, which contains records of Mental Health Act (MHA) reports grouped by police division, and Major Crime Indicators Dataset, which includes records of crimes similarly categorized by police division. The cleaned data set aggregates the number of MHA reports and crimes for each district, providing a comprehensive overview of the relationship between mental health reports and crime incidents across the specified districts.
 
 \newpage
@@ -269,9 +271,10 @@ By comparing the two bar plots (Figure @fig-compare) and line plots (Figure @fig
 ## 5.2 Introducing linear model
 In order to confirm there are linear relationship between two factors, a linear model is made to fit in this situation based on two data sets:
 
-$$
+\begin{equation}
 C = 6748.244 + 2.451 \times MHA 
-$$
+\label{eq:linear}
+\end{equation}
 
 in which:
 
@@ -349,7 +352,7 @@ summary_table
 
 # 6.Discussion
 
-This paper investigated the relationship between the number of Mental Health Act Apprehensions and the major crime indicator, according to Toronto Police Services data retrieved from OpenData Toronto. Results shows that as the number of MHA reports rises, the major crime indicator also increases, based on data from 2014 to 2024. Furthermore, there appears to be a positive linear relationship between the number of MHA reports and the number of major crime indicator, which can be expressed as a linear model $C = 6748.244 + 2.451 \times MHA$.
+This paper investigated the relationship between the number of Mental Health Act Apprehensions and the major crime indicator, according to Toronto Police Services data retrieved from OpenData Toronto. Results shows that as the number of MHA reports rises, the major crime indicator also increases, based on data from 2014 to 2024. Furthermore, there appears to be a positive linear relationship between the number of MHA reports and the number of major crime indicator, which can be expressed as a linear model $C = 6748.244 + 2.451 \times MHA$ \eqref{eq:linear}.
 
 The result of this paper shares the insight of the research by Public Safety Canada: "In the international research for both youth and adults analyzed for this report, findings suggest that certain mental health disorders, such as substance use disorder, conduct disorder, and antisocial personality disorder were shown to have a significant correlation to offending and re-offending." The p-value of our model is $4.19 \times 10^{-5}$, which is far below the significance level of 0.05, indicating a strong correlation between the number of Mental Health Act Apprehensions and the major crime indicator.[@PublicSafetyCanada]
 
