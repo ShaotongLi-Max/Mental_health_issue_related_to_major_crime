@@ -1,27 +1,21 @@
-# Load necessary libraries
 library(dplyr)
 
-# Read in the cleaned data
 clean_data <- read.csv("/home/rstudio/STA304_Paper_1_MaxLI/data/analysis_data/clean_data.csv")
 
-# Basic structure and summary of the data
 cat("Structure of the cleaned data:\n")
 str(clean_data)
 
 cat("\nSummary of the cleaned data:\n")
 summary(clean_data)
 
-# Check for missing values
 cat("\nChecking for missing values:\n")
 missing_values <- sum(is.na(clean_data))
 cat("Total missing values:", missing_values, "\n")
 
-# Check unique districts
 cat("\nUnique districts in the dataset:\n")
 unique_districts <- unique(clean_data$DIVISION)
 print(unique_districts)
 
-# Basic statistics
 cat("\nBasic statistics for number of crimes and MHA reports:\n")
 crime_stats <- clean_data %>%
   summarise(
@@ -34,24 +28,16 @@ crime_stats <- clean_data %>%
   )
 print(crime_stats)
 
-# Visualize the data (optional, requires ggplot2)
-library(ggplot2)
-
-# Plot the number of crimes and MHA reports by district
-ggplot(clean_data, aes(x = reorder(DIVISION, -num_crimes), y = num_crimes)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Number of Crimes by District",
-       x = "District",
+library("ggplot2")
+model <- lm(num_crimes ~ num_mha_reports, data = clean_data)
+clean_data$predicted_crimes <- predict(model, newdata = clean_data)
+ggplot(clean_data, aes(x = num_mha_reports, y = num_crimes)) +
+  geom_point(color = "#A9CCE3") +  
+  geom_line(aes(y = predicted_crimes), color = "#F1948A") + 
+  labs(title = "Number of Crimes vs. Number of MHA Reports",
+       x = "Number of MHA Reports",
        y = "Number of Crimes") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme_minimal()
 
-ggplot(clean_data, aes(x = reorder(DIVISION, -num_mha_reports), y = num_mha_reports)) +
-  geom_bar(stat = "identity", fill = "salmon") +
-  labs(title = "Number of MHA Reports by District",
-       x = "District",
-       y = "Number of MHA Reports") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-# Print a message indicating that the tests are complete
 cat("\nData testing complete. Check the output above for details.\n")
 
