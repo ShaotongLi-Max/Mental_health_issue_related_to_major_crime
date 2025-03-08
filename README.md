@@ -1,8 +1,8 @@
-# STA304 Paper 1 MaxLI
+# Mental Health relates to Major Crime
 
 ## Overview
 
-This repository is designed to accompany the analysis and reporting for STA304 Paper 1, focusing on the relationship between crime data and MHA (Mental Health Act) reports. It provides all necessary scripts and data to replicate the analysis.
+This repository is designed to accompany the analysis and reporting for the Paper , focusing on the relationship between crime data and MHA (Mental Health Act) reports. It provides all necessary scripts and data to replicate the analysis.
 
 ## File Structure
 
